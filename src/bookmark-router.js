@@ -1,13 +1,19 @@
 const express = require('express')
-//const { isWebUri } = require('valid-url')
+const {isWebUri}  = require('valid-url')
+
+const uuid = require('uuid/v4')
 //const xss = require('xss')
-//const logger = require('../logger')
+
 const BookarksService = require('./bookmarks/bookmark-service')
 const store = require('./store')
 const bookmarksRouter = express.Router()
 const bodyParser = express.json()
 
 
+const winston = require('winston');
+
+
+  const logger = winston.createLogger({ level: 'info', format: winston.format.json(), transports: [ new winston.transports.File({ filename: 'info.log' }) ] });
 
   bookmarksRouter
   .route('/bookmarks')
